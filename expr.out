@@ -1,0 +1,130 @@
+State 0:
+          input ::= * stmts
+          stmts ::= * stmts eols stmt
+          stmts ::= * stmt
+          stmt ::= * assign
+          stmt ::= * print
+          stmt ::= * if_stmnt
+          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+
+                         KW_IF shift        11     
+                         stmts shift        2      
+                          stmt shift-reduce 2      stmts ::= stmt
+                         input accept
+                        assign shift-reduce 5      stmt ::= assign
+                         print shift-reduce 6      stmt ::= print
+                      if_stmnt shift-reduce 7      stmt ::= if_stmnt
+
+State 1:
+          stmts ::= stmts eols * stmt
+          eols ::= eols * TK_EOL
+          stmt ::= * assign
+          stmt ::= * print
+          stmt ::= * if_stmnt
+          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+
+                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
+                         KW_IF shift        11     
+                          stmt shift-reduce 1      stmts ::= stmts eols stmt
+                        assign shift-reduce 5      stmt ::= assign
+                         print shift-reduce 6      stmt ::= print
+                      if_stmnt shift-reduce 7      stmt ::= if_stmnt
+
+State 2:
+      (0) input ::= stmts *
+          stmts ::= stmts * eols stmt
+          eols ::= * eols TK_EOL
+          eols ::= * TK_EOL
+
+                             $ reduce       0      input ::= stmts
+                        TK_EOL shift-reduce 4      eols ::= TK_EOL
+                          eols shift        1      
+
+State 3:
+          eols ::= eols * TK_EOL
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols * optional_block_stmt
+
+                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
+           optional_block_stmt shift-reduce 8      if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+
+State 4:
+          eols ::= * eols TK_EOL
+          eols ::= * TK_EOL
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE * eols optional_block_stmt
+
+                        TK_EOL shift-reduce 4      eols ::= TK_EOL
+                          eols shift        3      
+
+State 5:
+          eols ::= * eols TK_EOL
+          eols ::= * TK_EOL
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt * eols KW_ELSE eols optional_block_stmt
+      (9) if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt *
+
+                        TK_EOL shift-reduce 4      eols ::= TK_EOL
+                        TK_EOL reduce       9       ** Parsing conflict **
+                          eols shift        9      
+                     {default} reduce       9      if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+
+State 6:
+          eols ::= eols * TK_EOL
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols * optional_block_stmt eols KW_ELSE eols optional_block_stmt
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols * optional_block_stmt
+
+                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
+           optional_block_stmt shift        5      
+
+State 7:
+          eols ::= * eols TK_EOL
+          eols ::= * TK_EOL
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR * eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR * eols optional_block_stmt
+
+                        TK_EOL shift-reduce 4      eols ::= TK_EOL
+                          eols shift        6      
+
+State 8:
+          if_stmnt ::= KW_IF TK_LEFT_PAR * logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+          if_stmnt ::= KW_IF TK_LEFT_PAR * logic_expression TK_RIGHT_PAR eols optional_block_stmt
+
+              logic_expression shift        10     
+
+State 9:
+          eols ::= eols * TK_EOL
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols * KW_ELSE eols optional_block_stmt
+
+                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
+                       KW_ELSE shift        4      
+
+State 10:
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression * TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression * TK_RIGHT_PAR eols optional_block_stmt
+
+                  TK_RIGHT_PAR shift        7      
+
+State 11:
+          if_stmnt ::= KW_IF * TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+          if_stmnt ::= KW_IF * TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+
+                   TK_LEFT_PAR shift        8      
+
+----------------------------------------------------
+Symbols:
+    0: $:
+    1: TK_EOL
+    2: KW_IF
+    3: TK_LEFT_PAR
+    4: TK_RIGHT_PAR
+    5: KW_ELSE
+    6: error:
+    7: stmts: KW_IF
+    8: stmt: KW_IF
+    9: input: KW_IF
+   10: eols: TK_EOL
+   11: assign:
+   12: print:
+   13: if_stmnt: KW_IF
+   14: logic_expression:
+   15: optional_block_stmt:

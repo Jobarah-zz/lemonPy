@@ -18,5 +18,5 @@ $(EXPR_PARSER_SRC): expr.y
 %o.: %.cpp tokens.h
 	g++ -c -o $@ $<
 
-run: $(TARGET
+run: $(TARGET)
 	./$(TARGET) TextInputs/input1.txt
