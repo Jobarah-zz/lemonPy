@@ -1,45 +1,18 @@
 //Wild comment appears 1
-_0 = 10
+_variable0 = 10
 //Wild comment appears 2
-_7 = 20
+variable7 = 20
 
-_1 = (_0 + _7) * 5
+variable1 = (_variable0 + variable7) * 5
 
-/*print _0, dec
-print _7, dec	All this is block commented
-print _1, dec*/
+/*print _variable0, dec
+print variable7, dec	All this is block commented
+print variable1, dec*/
 
-if (_0 == 10) 
-    _1 = (_0 + _7) * 5
+if (_variable0 == 10) 
+    variable1 = (_variable0 + variable7) * 5
 else
-    _1 = 20
+    variable1 = 20
 
-print _1, bin
-print (_1 + 10), dec
-
-#include "input2.txt"
-#include <input2.txt>
-
-print (_1 + 10), dec
-
-print 210, bin
-print 150, dec
-print 109, hex
-
-print _0, bin
-print _0, dec
-print _0, hex
-
-if (_0 == 10) 
-{
-    _1 = (_0 + _7) * 5
-}
-else
-    _1 = 20
-
-print _1, dec
-
-if (_0 == 10) 
-    _1 = (_0 + _7) * 5
-
-print _1, dec
+print variable1, bin
+print (variable1 + 10), dec

@@ -1,10 +1,10 @@
 #define TK_EOL                           1
-#define KW_IF                            2
+#define RW_IF                            2
 #define TK_LEFT_PAR                      3
 #define TK_RIGHT_PAR                     4
-#define KW_ELSE                          5
-#define TK_LEFT_CURLY_BRAKET             6
-#define TK_RIGHT_CURLY_BRAKET            7
+#define RW_ELSE                          5
+#define TK_LEFT_CB                       6
+#define TK_RIGHT_CB                      7
 #define OP_GT                            8
 #define OP_LT                            9
 #define OP_GT_EQUAL                     10

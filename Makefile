@@ -13,7 +13,7 @@ $(EXPR_LEXER_SRC): expr.l
 	flex -o $@ $^
 
 $(EXPR_PARSER_SRC): expr.y
-	./lemon -o$@ -dexpr_tokens.h -Tlempar.c $<
+	./lemon -o$@ -dtokens.h -Tlempar.c $<
 
 %o.: %.cpp tokens.h
 	g++ -c -o $@ $<

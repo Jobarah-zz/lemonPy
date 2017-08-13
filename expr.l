@@ -11,6 +11,7 @@
 	#include <stdio.h>
 	#include <iostream>
 	#include "tokens.h"
+	#include "TokenStruct.h"
 
 	using namespace std;
 
@@ -26,6 +27,8 @@
 	char *yyfilename;
 	int push_file(char *filename);
 	int pop_file();
+
+	Token *current_token;
 %}
 
 %%
@@ -43,7 +46,7 @@
 "("			{ return TK_LEFT_PAR; }
 ")"			{ return TK_RIGHT_PAR; }
 ","			{ return TK_COMMA; }
-[0-9]+		{ yylval.int_t = atoi(yytext); return TK_NUMBER; }
+[0-9]+		{ current_token = new Token(NULL, atoi(yytext)); return TK_NUMBER; }
 ">"			{ return OP_GT; }
 "<"			{ return OP_LT; }
 ">="		{ return OP_GT_EQUAL; }
@@ -57,10 +60,10 @@
 "bin"		{ return RW_BIN; }
 "dec"		{ return RW_DEC; }
 "hex"		{ return RW_HEX; }
-_?([a-zA-Z])+([a-zA-Z]|[0-9]|_)* { string * s_t = new string(yytext); yylval.string_t = s_t; return TK_VAR; }
+[_a-zA-Z][_a-zA-Z0-9]+ { current_token = new Token (new string(yytext), -1); return TK_VAR; }
 "\n"		{ return TK_EOL; }
 <INITIAL><<EOF>>		{ if (pop_file() != 0) yyterminate(); }
-.			{ return TK_ERROR; }
+.			{ printf("Unexpected Token at line: %d\n", yylineno); yyterminate(); }
 
 
 <include_quotes>[^\"\n]+ {

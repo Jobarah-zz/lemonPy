@@ -1,13 +1,11 @@
 #include "ast.h"
+#include "helpers.h"
 
 map<string, int> vars;
 
 #define BIN 0
 #define DEC 1
 #define HEX 2
-
-int convertBin(int decimalnum);
-void printConv(int number, int convType);
 
 int AddExpr::eval(){
 	int v1 = expr1->eval();
@@ -38,7 +36,7 @@ int DivExpr::eval(){
 }
 
 int VarExpr::eval(){
-	return vars.at(index);
+	return vars.at(this->index);
 }
 
 int EqualExpr::eval(){
@@ -91,7 +89,7 @@ void AssignStatement::exec(){
 
 void PrintStatement::exec(){
 	int value = expr->eval();
-	printConv(value, format);
+	printFormat(value, format);
 }
 
 void BlockStatement::exec(){

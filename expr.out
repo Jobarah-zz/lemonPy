@@ -2,37 +2,298 @@ State 0:
           input ::= * stmts
           stmts ::= * stmts eols stmt
           stmts ::= * stmt
-          stmt ::= * assign
-          stmt ::= * print
+          stmt ::= * assign_stmt
+          stmt ::= * print_stmt
           stmt ::= * if_stmnt
-          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
-          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+          if_stmnt ::= * RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+          assign_stmt ::= * TK_VAR OP_ASSIGN expr
+          print_stmt ::= * RW_PRINT expr TK_COMMA conv_type
 
-                         KW_IF shift        11     
-                         stmts shift        2      
+                         RW_IF shift        30     
+                        TK_VAR shift        27     
+                      RW_PRINT shift        7      
                           stmt shift-reduce 2      stmts ::= stmt
-                         input accept
-                        assign shift-reduce 5      stmt ::= assign
-                         print shift-reduce 6      stmt ::= print
+                         stmts shift        17     
                       if_stmnt shift-reduce 7      stmt ::= if_stmnt
+                    print_stmt shift-reduce 6      stmt ::= print_stmt
+                   assign_stmt shift-reduce 5      stmt ::= assign_stmt
+                         input accept
 
 State 1:
-          stmts ::= stmts eols * stmt
           eols ::= eols * TK_EOL
-          stmt ::= * assign
-          stmt ::= * print
+          stmt ::= * assign_stmt
+          stmt ::= * print_stmt
           stmt ::= * if_stmnt
-          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
-          if_stmnt ::= * KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+          if_stmnt ::= * RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+          optional_else ::= RW_ELSE eols * block_stmt
+          block_stmt ::= * TK_LEFT_CB stmts TK_RIGHT_CB
+          block_stmt ::= * stmt
+          assign_stmt ::= * TK_VAR OP_ASSIGN expr
+          print_stmt ::= * RW_PRINT expr TK_COMMA conv_type
 
                         TK_EOL shift-reduce 3      eols ::= eols TK_EOL
-                         KW_IF shift        11     
-                          stmt shift-reduce 1      stmts ::= stmts eols stmt
-                        assign shift-reduce 5      stmt ::= assign
-                         print shift-reduce 6      stmt ::= print
+                         RW_IF shift        30     
+                    TK_LEFT_CB shift        3      
+                        TK_VAR shift        27     
+                      RW_PRINT shift        7      
+                          stmt shift-reduce 12     block_stmt ::= stmt
+                    block_stmt shift-reduce 9      optional_else ::= RW_ELSE eols block_stmt
                       if_stmnt shift-reduce 7      stmt ::= if_stmnt
+                    print_stmt shift-reduce 6      stmt ::= print_stmt
+                   assign_stmt shift-reduce 5      stmt ::= assign_stmt
 
 State 2:
+          stmt ::= * assign_stmt
+          stmt ::= * print_stmt
+          stmt ::= * if_stmnt
+          if_stmnt ::= * RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+          if_stmnt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL * block_stmt optional_else
+          block_stmt ::= * TK_LEFT_CB stmts TK_RIGHT_CB
+          block_stmt ::= * stmt
+          assign_stmt ::= * TK_VAR OP_ASSIGN expr
+          print_stmt ::= * RW_PRINT expr TK_COMMA conv_type
+
+                         RW_IF shift        30     
+                    TK_LEFT_CB shift        3      
+                        TK_VAR shift        27     
+                      RW_PRINT shift        7      
+                          stmt shift-reduce 12     block_stmt ::= stmt
+                    block_stmt shift        19     
+                      if_stmnt shift-reduce 7      stmt ::= if_stmnt
+                    print_stmt shift-reduce 6      stmt ::= print_stmt
+                   assign_stmt shift-reduce 5      stmt ::= assign_stmt
+
+State 3:
+          stmts ::= * stmts eols stmt
+          stmts ::= * stmt
+          stmt ::= * assign_stmt
+          stmt ::= * print_stmt
+          stmt ::= * if_stmnt
+          if_stmnt ::= * RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+          block_stmt ::= TK_LEFT_CB * stmts TK_RIGHT_CB
+          assign_stmt ::= * TK_VAR OP_ASSIGN expr
+          print_stmt ::= * RW_PRINT expr TK_COMMA conv_type
+
+                         RW_IF shift        30     
+                        TK_VAR shift        27     
+                      RW_PRINT shift        7      
+                          stmt shift-reduce 2      stmts ::= stmt
+                         stmts shift        16     
+                      if_stmnt shift-reduce 7      stmt ::= if_stmnt
+                    print_stmt shift-reduce 6      stmt ::= print_stmt
+                   assign_stmt shift-reduce 5      stmt ::= assign_stmt
+
+State 4:
+          stmts ::= stmts eols * stmt
+          eols ::= eols * TK_EOL
+          stmt ::= * assign_stmt
+          stmt ::= * print_stmt
+          stmt ::= * if_stmnt
+          if_stmnt ::= * RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+          assign_stmt ::= * TK_VAR OP_ASSIGN expr
+          print_stmt ::= * RW_PRINT expr TK_COMMA conv_type
+
+                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
+                         RW_IF shift        30     
+                        TK_VAR shift        27     
+                      RW_PRINT shift        7      
+                          stmt shift-reduce 1      stmts ::= stmts eols stmt
+                      if_stmnt shift-reduce 7      stmt ::= if_stmnt
+                    print_stmt shift-reduce 6      stmt ::= print_stmt
+                   assign_stmt shift-reduce 5      stmt ::= assign_stmt
+
+State 5:
+          if_stmnt ::= RW_IF TK_LEFT_PAR * conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+          conditional_expr ::= * expr relational_ops expr
+          expr ::= * expr OP_ADD term
+          expr ::= * expr OP_SUB term
+          expr ::= * term
+          term ::= * term OP_MUL factor
+          term ::= * term OP_DIV factor
+          term ::= * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                          expr shift        12     
+              conditional_expr shift        29     
+                          term shift        23     
+                        factor shift-reduce 30     term ::= factor
+
+State 6:
+          conditional_expr ::= expr relational_ops * expr
+          expr ::= * expr OP_ADD term
+          expr ::= * expr OP_SUB term
+          expr ::= * term
+          term ::= * term OP_MUL factor
+          term ::= * term OP_DIV factor
+          term ::= * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                          expr shift        22     
+                          term shift        23     
+                        factor shift-reduce 30     term ::= factor
+
+State 7:
+          print_stmt ::= RW_PRINT * expr TK_COMMA conv_type
+          expr ::= * expr OP_ADD term
+          expr ::= * expr OP_SUB term
+          expr ::= * term
+          term ::= * term OP_MUL factor
+          term ::= * term OP_DIV factor
+          term ::= * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                          expr shift        20     
+                          term shift        23     
+                        factor shift-reduce 30     term ::= factor
+
+State 8:
+          expr ::= * expr OP_ADD term
+          expr ::= * expr OP_SUB term
+          expr ::= * term
+          term ::= * term OP_MUL factor
+          term ::= * term OP_DIV factor
+          term ::= * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+          factor ::= TK_LEFT_PAR * expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                          expr shift        21     
+                          term shift        23     
+                        factor shift-reduce 30     term ::= factor
+
+State 9:
+          assign_stmt ::= TK_VAR OP_ASSIGN * expr
+          expr ::= * expr OP_ADD term
+          expr ::= * expr OP_SUB term
+          expr ::= * term
+          term ::= * term OP_MUL factor
+          term ::= * term OP_DIV factor
+          term ::= * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                          expr shift        26     
+                          term shift        23     
+                        factor shift-reduce 30     term ::= factor
+
+State 10:
+          expr ::= expr OP_SUB * term
+          term ::= * term OP_MUL factor
+          term ::= * term OP_DIV factor
+          term ::= * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                          term shift        24     
+                        factor shift-reduce 30     term ::= factor
+
+State 11:
+          expr ::= expr OP_ADD * term
+          term ::= * term OP_MUL factor
+          term ::= * term OP_DIV factor
+          term ::= * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                          term shift        25     
+                        factor shift-reduce 30     term ::= factor
+
+State 12:
+          conditional_expr ::= expr * relational_ops expr
+          relational_ops ::= * OP_GT
+          relational_ops ::= * OP_LT
+          relational_ops ::= * OP_GT_EQUAL
+          relational_ops ::= * OP_LT_EQUAL
+          relational_ops ::= * OP_NOT_EQUAL
+          relational_ops ::= * OP_EQUAL
+          expr ::= expr * OP_ADD term
+          expr ::= expr * OP_SUB term
+
+                         OP_GT shift-reduce 14     relational_ops ::= OP_GT
+                         OP_LT shift-reduce 15     relational_ops ::= OP_LT
+                   OP_GT_EQUAL shift-reduce 16     relational_ops ::= OP_GT_EQUAL
+                   OP_LT_EQUAL shift-reduce 17     relational_ops ::= OP_LT_EQUAL
+                  OP_NOT_EQUAL shift-reduce 18     relational_ops ::= OP_NOT_EQUAL
+                      OP_EQUAL shift-reduce 19     relational_ops ::= OP_EQUAL
+                        OP_ADD shift        11     
+                        OP_SUB shift        10     
+                relational_ops shift        6      
+
+State 13:
+          print_stmt ::= RW_PRINT expr TK_COMMA * conv_type
+          conv_type ::= * RW_BIN
+          conv_type ::= * RW_DEC
+          conv_type ::= * RW_HEX
+
+                        RW_BIN shift-reduce 22     conv_type ::= RW_BIN
+                        RW_DEC shift-reduce 23     conv_type ::= RW_DEC
+                        RW_HEX shift-reduce 24     conv_type ::= RW_HEX
+                     conv_type shift-reduce 21     print_stmt ::= RW_PRINT expr TK_COMMA conv_type
+
+State 14:
+          term ::= term OP_DIV * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                        factor shift-reduce 29     term ::= term OP_DIV factor
+
+State 15:
+          term ::= term OP_MUL * factor
+          factor ::= * TK_NUMBER
+          factor ::= * TK_VAR
+          factor ::= * TK_LEFT_PAR expr TK_RIGHT_PAR
+
+                   TK_LEFT_PAR shift        8      
+                        TK_VAR shift-reduce 32     factor ::= TK_VAR
+                     TK_NUMBER shift-reduce 31     factor ::= TK_NUMBER
+                        factor shift-reduce 28     term ::= term OP_MUL factor
+
+State 16:
+          stmts ::= stmts * eols stmt
+          eols ::= * eols TK_EOL
+          eols ::= * TK_EOL
+          block_stmt ::= TK_LEFT_CB stmts * TK_RIGHT_CB
+
+                        TK_EOL shift-reduce 4      eols ::= TK_EOL
+                   TK_RIGHT_CB shift-reduce 11     block_stmt ::= TK_LEFT_CB stmts TK_RIGHT_CB
+                          eols shift        4      
+
+State 17:
       (0) input ::= stmts *
           stmts ::= stmts * eols stmt
           eols ::= * eols TK_EOL
@@ -40,91 +301,150 @@ State 2:
 
                              $ reduce       0      input ::= stmts
                         TK_EOL shift-reduce 4      eols ::= TK_EOL
+                          eols shift        4      
+
+State 18:
+          eols ::= * eols TK_EOL
+          eols ::= * TK_EOL
+          optional_else ::= RW_ELSE * eols block_stmt
+
+                        TK_EOL shift-reduce 4      eols ::= TK_EOL
                           eols shift        1      
 
-State 3:
-          eols ::= eols * TK_EOL
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols * optional_block_stmt
+State 19:
+          if_stmnt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt * optional_else
+          optional_else ::= * RW_ELSE eols block_stmt
+     (10) optional_else ::= *
 
-                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
-           optional_block_stmt shift-reduce 8      if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
+                       RW_ELSE shift        18     
+                       RW_ELSE reduce       10      ** Parsing conflict **
+                 optional_else shift-reduce 8      if_stmnt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+                     {default} reduce       10     optional_else ::=
 
-State 4:
-          eols ::= * eols TK_EOL
-          eols ::= * TK_EOL
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE * eols optional_block_stmt
+State 20:
+          print_stmt ::= RW_PRINT expr * TK_COMMA conv_type
+          expr ::= expr * OP_ADD term
+          expr ::= expr * OP_SUB term
 
-                        TK_EOL shift-reduce 4      eols ::= TK_EOL
-                          eols shift        3      
+                      TK_COMMA shift        13     
+                        OP_ADD shift        11     
+                        OP_SUB shift        10     
 
-State 5:
-          eols ::= * eols TK_EOL
-          eols ::= * TK_EOL
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt * eols KW_ELSE eols optional_block_stmt
-      (9) if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt *
+State 21:
+          expr ::= expr * OP_ADD term
+          expr ::= expr * OP_SUB term
+          factor ::= TK_LEFT_PAR expr * TK_RIGHT_PAR
 
-                        TK_EOL shift-reduce 4      eols ::= TK_EOL
-                        TK_EOL reduce       9       ** Parsing conflict **
-                          eols shift        9      
-                     {default} reduce       9      if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+                  TK_RIGHT_PAR shift-reduce 33     factor ::= TK_LEFT_PAR expr TK_RIGHT_PAR
+                        OP_ADD shift        11     
+                        OP_SUB shift        10     
 
-State 6:
-          eols ::= eols * TK_EOL
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols * optional_block_stmt eols KW_ELSE eols optional_block_stmt
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols * optional_block_stmt
+State 22:
+     (13) conditional_expr ::= expr relational_ops expr *
+          expr ::= expr * OP_ADD term
+          expr ::= expr * OP_SUB term
 
-                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
-           optional_block_stmt shift        5      
+                        OP_ADD shift        11     
+                        OP_SUB shift        10     
+                     {default} reduce       13     conditional_expr ::= expr relational_ops expr
 
-State 7:
-          eols ::= * eols TK_EOL
-          eols ::= * TK_EOL
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR * eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR * eols optional_block_stmt
+State 23:
+     (27) expr ::= term *
+          term ::= term * OP_MUL factor
+          term ::= term * OP_DIV factor
 
-                        TK_EOL shift-reduce 4      eols ::= TK_EOL
-                          eols shift        6      
+                        OP_MUL shift        15     
+                        OP_DIV shift        14     
+                     {default} reduce       27     expr ::= term
 
-State 8:
-          if_stmnt ::= KW_IF TK_LEFT_PAR * logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
-          if_stmnt ::= KW_IF TK_LEFT_PAR * logic_expression TK_RIGHT_PAR eols optional_block_stmt
+State 24:
+     (26) expr ::= expr OP_SUB term *
+          term ::= term * OP_MUL factor
+          term ::= term * OP_DIV factor
 
-              logic_expression shift        10     
+                        OP_MUL shift        15     
+                        OP_DIV shift        14     
+                     {default} reduce       26     expr ::= expr OP_SUB term
 
-State 9:
-          eols ::= eols * TK_EOL
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols * KW_ELSE eols optional_block_stmt
+State 25:
+     (25) expr ::= expr OP_ADD term *
+          term ::= term * OP_MUL factor
+          term ::= term * OP_DIV factor
 
-                        TK_EOL shift-reduce 3      eols ::= eols TK_EOL
-                       KW_ELSE shift        4      
+                        OP_MUL shift        15     
+                        OP_DIV shift        14     
+                     {default} reduce       25     expr ::= expr OP_ADD term
 
-State 10:
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression * TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
-          if_stmnt ::= KW_IF TK_LEFT_PAR logic_expression * TK_RIGHT_PAR eols optional_block_stmt
+State 26:
+     (20) assign_stmt ::= TK_VAR OP_ASSIGN expr *
+          expr ::= expr * OP_ADD term
+          expr ::= expr * OP_SUB term
 
-                  TK_RIGHT_PAR shift        7      
+                        OP_ADD shift        11     
+                        OP_SUB shift        10     
+                     {default} reduce       20     assign_stmt ::= TK_VAR OP_ASSIGN expr
 
-State 11:
-          if_stmnt ::= KW_IF * TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt eols KW_ELSE eols optional_block_stmt
-          if_stmnt ::= KW_IF * TK_LEFT_PAR logic_expression TK_RIGHT_PAR eols optional_block_stmt
+State 27:
+          assign_stmt ::= TK_VAR * OP_ASSIGN expr
 
-                   TK_LEFT_PAR shift        8      
+                     OP_ASSIGN shift        9      
+
+State 28:
+          if_stmnt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR * TK_EOL block_stmt optional_else
+
+                        TK_EOL shift        2      
+
+State 29:
+          if_stmnt ::= RW_IF TK_LEFT_PAR conditional_expr * TK_RIGHT_PAR TK_EOL block_stmt optional_else
+
+                  TK_RIGHT_PAR shift        28     
+
+State 30:
+          if_stmnt ::= RW_IF * TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else
+
+                   TK_LEFT_PAR shift        5      
 
 ----------------------------------------------------
 Symbols:
     0: $:
     1: TK_EOL
-    2: KW_IF
+    2: RW_IF
     3: TK_LEFT_PAR
     4: TK_RIGHT_PAR
-    5: KW_ELSE
-    6: error:
-    7: stmts: KW_IF
-    8: stmt: KW_IF
-    9: input: KW_IF
-   10: eols: TK_EOL
-   11: assign:
-   12: print:
-   13: if_stmnt: KW_IF
-   14: logic_expression:
-   15: optional_block_stmt:
+    5: RW_ELSE
+    6: TK_LEFT_CB
+    7: TK_RIGHT_CB
+    8: OP_GT
+    9: OP_LT
+   10: OP_GT_EQUAL
+   11: OP_LT_EQUAL
+   12: OP_NOT_EQUAL
+   13: OP_EQUAL
+   14: TK_VAR
+   15: OP_ASSIGN
+   16: RW_PRINT
+   17: TK_COMMA
+   18: RW_BIN
+   19: RW_DEC
+   20: RW_HEX
+   21: OP_ADD
+   22: OP_SUB
+   23: OP_MUL
+   24: OP_DIV
+   25: TK_NUMBER
+   26: error:
+   27: stmt: RW_IF TK_VAR RW_PRINT
+   28: stmts: RW_IF TK_VAR RW_PRINT
+   29: block_stmt: RW_IF TK_LEFT_CB TK_VAR RW_PRINT
+   30: if_stmnt: RW_IF
+   31: optional_else: <lambda> RW_ELSE
+   32: print_stmt: RW_PRINT
+   33: assign_stmt: TK_VAR
+   34: expr: TK_LEFT_PAR TK_VAR TK_NUMBER
+   35: conditional_expr: TK_LEFT_PAR TK_VAR TK_NUMBER
+   36: relational_ops: OP_GT OP_LT OP_GT_EQUAL OP_LT_EQUAL OP_NOT_EQUAL OP_EQUAL
+   37: term: TK_LEFT_PAR TK_VAR TK_NUMBER
+   38: factor: TK_LEFT_PAR TK_VAR TK_NUMBER
+   39: conv_type: RW_BIN RW_DEC RW_HEX
+   40: input: RW_IF TK_VAR RW_PRINT
+   41: eols: TK_EOL
