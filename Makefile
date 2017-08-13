@@ -20,3 +20,9 @@ $(EXPR_PARSER_SRC): expr.y
 
 run: $(TARGET)
 	./$(TARGET) TextInputs/input1.txt
+
+clean:
+	rm -f $(EXPR_PARSER_SRC) $(EXPR_LEXER_SRC)
+	rm -f $(TARGET)
+	rm -f *.o
+	rm -f tokens.h

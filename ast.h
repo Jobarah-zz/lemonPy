@@ -12,6 +12,7 @@ using namespace std;
 
 class Expr {
 public:
+	Expr() {}
 	virtual int eval() = 0;
 };
 
@@ -115,6 +116,7 @@ public:
 
 class Statement{
 	public:
+		Statement() {}
 		virtual void exec() = 0;
 };
 
@@ -169,6 +171,19 @@ class IfStatement: public Statement{
 		
 		Expr *expr;
 		Statement *if_statement, *else_statement;
+};
+
+class WhileStatement: public Statement{
+	public:
+		WhileStatement(Expr *expr, Statement *body) {
+			this->expr = expr;
+			this->body = body;
+		}
+
+		void exec();
+		
+		Expr *expr;
+		Statement *body;
 };
 
 #endif

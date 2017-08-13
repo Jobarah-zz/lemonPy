@@ -99,11 +99,19 @@ void BlockStatement::exec(){
 }
 
 void IfStatement::exec() {
-	if(this->expr->eval()) {
+	if (this->expr->eval()) {
 		if_statement->exec();
 	} else {
 		if(this->else_statement) {
 			else_statement->exec();
+		}
+	}
+}
+
+void WhileStatement::exec() {
+	if (this->body != NULL) {
+		while (this->expr->eval()) {
+			this->body->exec();
 		}
 	}
 }

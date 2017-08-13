@@ -56,11 +56,12 @@
 "="			{ return OP_ASSIGN; }
 "if"		{ return RW_IF; }
 "else"		{ return RW_ELSE; }
+"while"		{ return RW_WHILE; }
 "print"		{ return RW_PRINT; }
 "bin"		{ return RW_BIN; }
 "dec"		{ return RW_DEC; }
 "hex"		{ return RW_HEX; }
-[_a-zA-Z][_a-zA-Z0-9]+ { current_token = new Token (new string(yytext), -1); return TK_VAR; }
+[_a-zA-Z][a-zA-Z0-9_]* { current_token = new Token (new string(yytext), -1); return TK_VAR; }
 "\n"		{ return TK_EOL; }
 <INITIAL><<EOF>>		{ if (pop_file() != 0) yyterminate(); }
 .			{ printf("Unexpected Token at line: %d\n", yylineno); yyterminate(); }

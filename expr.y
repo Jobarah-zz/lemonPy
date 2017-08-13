@@ -13,7 +13,8 @@
 %type stmt { Statement * }
 %type stmts { Statement * }
 %type block_stmt { Statement * }
-%type if_stmnt { Statement * }
+%type if_stmt { Statement * }
+%type while_stmt { Statement * }
 %type optional_else { Statement * }
 %type print_stmt { Statement * }
 %type assign_stmt { Statement * }
@@ -24,8 +25,9 @@
 %type factor { Expr * }
 %type conv_type { int }
 %name Parser
+%start_symbol input
 
-input::= stmts(S). { S->exec(); }
+input::= opt_eols stmts(S). { S->exec(); }
 
 stmts(S)::= stmts(S1) eols stmt(s). { S = S1; ((BlockStatement*)S)->addStatement(s); }
 stmts(S)::= stmt(s). { S = new BlockStatement; ((BlockStatement*)S)->addStatement(s); }
@@ -33,16 +35,22 @@ stmts(S)::= stmt(s). { S = new BlockStatement; ((BlockStatement*)S)->addStatemen
 eols::= eols TK_EOL.
 eols::= TK_EOL.
 
+opt_eols::= eols.
+opt_eols::= .
+
 stmt(S)::= assign_stmt(S1). { S = S1; }
 stmt(S)::= print_stmt(S1). { S = S1; }
-stmt(S)::= if_stmnt(S1). { S = S1; }
+stmt(S)::= if_stmt(S1). { S = S1; }
+stmt(S)::= while_stmt(S1). { S = S1; }
 
-if_stmnt(S)::= RW_IF TK_LEFT_PAR conditional_expr(S3) TK_RIGHT_PAR TK_EOL block_stmt(S6) optional_else(S7). { S = new IfStatement(S3,S6,S7); }
+while_stmt(S)::= RW_WHILE TK_LEFT_PAR conditional_expr(S3) TK_RIGHT_PAR TK_EOL block_stmt(S6). { S = new WhileStatement(S3, S6); }
+
+if_stmt(S)::= RW_IF TK_LEFT_PAR conditional_expr(S3) TK_RIGHT_PAR TK_EOL block_stmt(S6) optional_else(S7). { S = new IfStatement(S3,S6,S7); }
 
 optional_else(S)::= RW_ELSE eols block_stmt(S3). { S = S3; }
 optional_else(S)::= . { S = NULL; }
 
-block_stmt(S)::= TK_LEFT_CB stmts(S3) TK_RIGHT_CB. { S = S3; }
+block_stmt(S)::= TK_LEFT_CB opt_eols stmts(S3) opt_eols TK_RIGHT_CB. { S = S3; }
 block_stmt(S)::= stmt(S1). { S = S1; }
 
 conditional_expr(S)::= expr(S1) relational_ops(S2) expr(S3). { S = S2; ((BinaryExpr*)S)->expr1 = S1; ((BinaryExpr*)S)->expr2 = S3; }

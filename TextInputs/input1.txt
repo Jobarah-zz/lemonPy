@@ -9,10 +9,20 @@ variable1 = (_variable0 + variable7) * 5
 print variable7, dec	All this is block commented
 print variable1, dec*/
 
-if (_variable0 == 10) 
+if (_variable0 == 10)
+{
     variable1 = (_variable0 + variable7) * 5
+}
 else
     variable1 = 20
 
 print variable1, bin
 print (variable1 + 10), dec
+
+_variable0 = 8
+
+while (_variable0 < 18)
+{
+    print _variable0, dec
+    _variable0 = _variable0 + 1
+}

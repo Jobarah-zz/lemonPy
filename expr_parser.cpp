@@ -94,15 +94,15 @@
 #endif
 /************* Begin control #defines *****************************************/
 #define YYCODETYPE unsigned char
-#define YYNOCODE 43
+#define YYNOCODE 46
 #define YYACTIONTYPE unsigned char
 #define ParserTOKENTYPE  Token * 
 typedef union {
   int yyinit;
   ParserTOKENTYPE yy0;
-  int yy4;
-  Expr * yy74;
-  Statement * yy80;
+  Expr * yy2;
+  int yy22;
+  Statement * yy26;
 } YYMINORTYPE;
 #ifndef YYSTACKDEPTH
 #define YYSTACKDEPTH 100
@@ -111,16 +111,16 @@ typedef union {
 #define ParserARG_PDECL
 #define ParserARG_FETCH
 #define ParserARG_STORE
-#define YYNSTATE             31
-#define YYNRULE              34
-#define YY_MAX_SHIFT         30
-#define YY_MIN_SHIFTREDUCE   58
-#define YY_MAX_SHIFTREDUCE   91
-#define YY_MIN_REDUCE        92
-#define YY_MAX_REDUCE        125
-#define YY_ERROR_ACTION      126
-#define YY_ACCEPT_ACTION     127
-#define YY_NO_ACTION         128
+#define YYNSTATE             41
+#define YYNRULE              38
+#define YY_MAX_SHIFT         40
+#define YY_MIN_SHIFTREDUCE   70
+#define YY_MAX_SHIFTREDUCE   107
+#define YY_MIN_REDUCE        108
+#define YY_MAX_REDUCE        145
+#define YY_ERROR_ACTION      146
+#define YY_ACCEPT_ACTION     147
+#define YY_NO_ACTION         148
 /************* End control #defines *******************************************/
 
 /* Define the yytestcase() macro to be a no-op if is not already defined
@@ -188,56 +188,65 @@ typedef union {
 **  yy_default[]       Default action for each state.
 **
 *********** Begin parsing tables **********************************************/
-#define YY_ACTTAB_COUNT (105)
+#define YY_ACTTAB_COUNT (131)
 static const YYACTIONTYPE yy_action[] = {
- /*     0 */    72,   73,   74,   75,   76,   77,   60,   17,    6,   65,
- /*    10 */    79,   64,   63,   11,   10,   61,   30,   24,   88,  127,
- /*    20 */     3,   70,   87,   67,   65,   86,   64,   63,   27,   70,
- /*    30 */     7,   19,   65,   62,   64,   63,    4,   60,   16,    8,
- /*    40 */    65,   30,   64,   63,    1,    3,   18,   61,   30,   66,
- /*    50 */    90,   59,    9,   27,   65,    7,   64,   63,   30,    2,
- /*    60 */    27,   89,    7,   12,   29,   22,   23,   88,   23,   88,
- /*    70 */    27,   28,    7,    5,   20,   91,   21,   23,   88,   23,
- /*    80 */    88,   94,   26,   92,   62,   23,   88,   80,   81,   82,
- /*    90 */    13,   94,   11,   10,   11,   10,   25,   88,   62,   11,
- /*   100 */    10,   94,   15,   14,   69,
+ /*     0 */    88,   89,   90,   91,   92,   93,   73,   40,   29,  104,
+ /*    10 */    37,   74,   17,   15,   14,   18,   36,   95,   28,  104,
+ /*    20 */    33,   86,   11,   83,   79,   80,   10,   78,   77,   86,
+ /*    30 */   103,   24,   79,   80,   27,   78,   77,   28,  104,   86,
+ /*    40 */   102,   81,   79,   80,   25,   78,   77,   28,  104,   72,
+ /*    50 */    16,    7,   79,   80,   85,   78,   77,   72,   22,    1,
+ /*    60 */    79,   80,   23,   78,   77,   82,   40,   40,   13,   37,
+ /*    70 */    37,   17,   26,   73,   40,   28,  104,   37,   73,   33,
+ /*    80 */    33,   11,   11,    2,  147,    5,   34,   33,   12,   11,
+ /*    90 */    71,   32,    6,   79,   80,   31,   78,   77,   28,  104,
+ /*   100 */   106,  107,   35,   18,   39,    8,   28,  104,   96,   97,
+ /*   110 */    98,  105,   19,   30,  104,    3,   15,   14,    9,   15,
+ /*   120 */    14,    4,   34,  108,   74,   38,   15,   14,  110,   21,
+ /*   130 */    20,
 };
 static const YYCODETYPE yy_lookahead[] = {
- /*     0 */     8,    9,   10,   11,   12,   13,   27,   28,   36,   30,
- /*    10 */    39,   32,   33,   21,   22,    1,    2,   37,   38,   40,
- /*    20 */     6,   27,   38,   29,   30,   38,   32,   33,   14,   27,
- /*    30 */    16,   29,   30,    1,   32,   33,   41,   27,   28,    3,
- /*    40 */    30,    2,   32,   33,   41,    6,    5,    1,    2,   31,
- /*    50 */    14,   27,   15,   14,   30,   16,   32,   33,    2,    1,
- /*    60 */    14,   25,   16,   34,   35,   34,   37,   38,   37,   38,
- /*    70 */    14,    4,   16,    3,   34,    4,   34,   37,   38,   37,
- /*    80 */    38,   42,   34,    0,    1,   37,   38,   18,   19,   20,
- /*    90 */    17,   42,   21,   22,   21,   22,   37,   38,    1,   21,
- /*   100 */    22,   42,   23,   24,    7,
+ /*     0 */     9,   10,   11,   12,   13,   14,    1,    2,   39,   40,
+ /*    10 */     5,    1,    7,   22,   23,   36,   37,   41,   39,   40,
+ /*    20 */    15,   28,   17,   30,   31,   32,   38,   34,   35,   28,
+ /*    30 */    40,   30,   31,   32,   36,   34,   35,   39,   40,   28,
+ /*    40 */    40,   30,   31,   32,   36,   34,   35,   39,   40,   28,
+ /*    50 */    29,   44,   31,   32,    8,   34,   35,   28,   29,   44,
+ /*    60 */    31,   32,    6,   34,   35,   33,    2,    2,   16,    5,
+ /*    70 */     5,    7,   36,    1,    2,   39,   40,    5,    1,   15,
+ /*    80 */    15,   17,   17,    1,   42,   43,   44,   15,    3,   17,
+ /*    90 */    28,   43,   44,   31,   32,   36,   34,   35,   39,   40,
+ /*   100 */    15,    4,    4,   36,   37,    3,   39,   40,   19,   20,
+ /*   110 */    21,   26,   18,   39,   40,    1,   22,   23,    3,   22,
+ /*   120 */    23,   43,   44,    0,    1,    4,   22,   23,   45,   24,
+ /*   130 */    25,
 };
-#define YY_SHIFT_USE_DFLT (-9)
-#define YY_SHIFT_COUNT (30)
-#define YY_SHIFT_MIN   (-8)
-#define YY_SHIFT_MAX   (97)
+#define YY_SHIFT_USE_DFLT (-10)
+#define YY_SHIFT_COUNT (40)
+#define YY_SHIFT_MIN   (-9)
+#define YY_SHIFT_MAX   (123)
 static const signed char yy_shift_ofst[] = {
- /*     0 */    56,   14,   39,   56,   46,   36,   36,   36,   36,   36,
- /*    10 */    36,   36,   -8,   69,   36,   36,   97,   83,   32,   41,
- /*    20 */    73,   71,   78,   79,   79,   79,   78,   37,   58,   67,
- /*    30 */    70,
+ /*     0 */    10,    5,   64,   64,   65,   65,   72,   72,   85,   85,
+ /*    10 */    85,   85,   85,   85,   85,   85,   10,   10,   -9,   89,
+ /*    20 */    85,   85,  123,   10,   56,   94,   97,  104,  105,  105,
+ /*    30 */   105,  104,   46,   52,   77,   82,   98,  102,  114,  121,
+ /*    40 */   115,
 };
-#define YY_REDUCE_USE_DFLT (-30)
-#define YY_REDUCE_COUNT (19)
-#define YY_REDUCE_MIN   (-29)
-#define YY_REDUCE_MAX   (59)
+#define YY_REDUCE_USE_DFLT (-32)
+#define YY_REDUCE_COUNT (24)
+#define YY_REDUCE_MIN   (-31)
+#define YY_REDUCE_MAX   (78)
 static const signed char yy_reduce_ofst[] = {
- /*     0 */   -21,   -6,    2,   10,   24,   29,   31,   40,   42,   48,
- /*    10 */   -20,   59,  -28,  -29,  -16,  -13,   -5,   -5,    3,   18,
+ /*     0 */    42,   -7,    1,   11,   21,   29,   62,   62,  -21,   67,
+ /*    10 */    -2,    8,   36,   59,  -31,   74,   48,   78,  -12,  -24,
+ /*    20 */   -10,    0,    7,   15,   32,
 };
 static const YYACTIONTYPE yy_default[] = {
- /*     0 */   126,  126,  126,  126,  126,  126,  126,  126,  126,  126,
- /*    10 */   126,  126,  126,  126,  126,  126,  126,  126,  126,  102,
- /*    20 */   126,  126,  105,  119,  118,  117,  112,  126,  126,  126,
- /*    30 */   126,
+ /*     0 */   114,  146,  146,  146,  146,  146,  113,  146,  146,  146,
+ /*    10 */   146,  146,  146,  146,  146,  146,  114,  114,  146,  146,
+ /*    20 */   146,  146,  146,  146,  122,  146,  146,  125,  139,  138,
+ /*    30 */   137,  132,  146,  146,  113,  146,  146,  146,  146,  146,
+ /*    40 */   146,
 };
 /********** End of lemon-generated parsing tables *****************************/
 
@@ -341,17 +350,18 @@ void ParserTrace(FILE *TraceFILE, char *zTracePrompt){
 /* For tracing shifts, the names of all terminals and nonterminals
 ** are required.  The following table supplies these names */
 static const char *const yyTokenName[] = { 
-  "$",             "TK_EOL",        "RW_IF",         "TK_LEFT_PAR", 
-  "TK_RIGHT_PAR",  "RW_ELSE",       "TK_LEFT_CB",    "TK_RIGHT_CB", 
-  "OP_GT",         "OP_LT",         "OP_GT_EQUAL",   "OP_LT_EQUAL", 
-  "OP_NOT_EQUAL",  "OP_EQUAL",      "TK_VAR",        "OP_ASSIGN",   
-  "RW_PRINT",      "TK_COMMA",      "RW_BIN",        "RW_DEC",      
-  "RW_HEX",        "OP_ADD",        "OP_SUB",        "OP_MUL",      
-  "OP_DIV",        "TK_NUMBER",     "error",         "stmt",        
-  "stmts",         "block_stmt",    "if_stmnt",      "optional_else",
-  "print_stmt",    "assign_stmt",   "expr",          "conditional_expr",
-  "relational_ops",  "term",          "factor",        "conv_type",   
-  "input",         "eols",        
+  "$",             "TK_EOL",        "RW_WHILE",      "TK_LEFT_PAR", 
+  "TK_RIGHT_PAR",  "RW_IF",         "RW_ELSE",       "TK_LEFT_CB",  
+  "TK_RIGHT_CB",   "OP_GT",         "OP_LT",         "OP_GT_EQUAL", 
+  "OP_LT_EQUAL",   "OP_NOT_EQUAL",  "OP_EQUAL",      "TK_VAR",      
+  "OP_ASSIGN",     "RW_PRINT",      "TK_COMMA",      "RW_BIN",      
+  "RW_DEC",        "RW_HEX",        "OP_ADD",        "OP_SUB",      
+  "OP_MUL",        "OP_DIV",        "TK_NUMBER",     "error",       
+  "stmt",          "stmts",         "block_stmt",    "if_stmt",     
+  "while_stmt",    "optional_else",  "print_stmt",    "assign_stmt", 
+  "expr",          "conditional_expr",  "relational_ops",  "term",        
+  "factor",        "conv_type",     "input",         "opt_eols",    
+  "eols",        
 };
 #endif /* NDEBUG */
 
@@ -359,40 +369,44 @@ static const char *const yyTokenName[] = {
 /* For tracing reduce actions, the names of all rules are required.
 */
 static const char *const yyRuleName[] = {
- /*   0 */ "input ::= stmts",
+ /*   0 */ "input ::= opt_eols stmts",
  /*   1 */ "stmts ::= stmts eols stmt",
  /*   2 */ "stmts ::= stmt",
  /*   3 */ "eols ::= eols TK_EOL",
  /*   4 */ "eols ::= TK_EOL",
- /*   5 */ "stmt ::= assign_stmt",
- /*   6 */ "stmt ::= print_stmt",
- /*   7 */ "stmt ::= if_stmnt",
- /*   8 */ "if_stmnt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else",
- /*   9 */ "optional_else ::= RW_ELSE eols block_stmt",
- /*  10 */ "optional_else ::=",
- /*  11 */ "block_stmt ::= TK_LEFT_CB stmts TK_RIGHT_CB",
- /*  12 */ "block_stmt ::= stmt",
- /*  13 */ "conditional_expr ::= expr relational_ops expr",
- /*  14 */ "relational_ops ::= OP_GT",
- /*  15 */ "relational_ops ::= OP_LT",
- /*  16 */ "relational_ops ::= OP_GT_EQUAL",
- /*  17 */ "relational_ops ::= OP_LT_EQUAL",
- /*  18 */ "relational_ops ::= OP_NOT_EQUAL",
- /*  19 */ "relational_ops ::= OP_EQUAL",
- /*  20 */ "assign_stmt ::= TK_VAR OP_ASSIGN expr",
- /*  21 */ "print_stmt ::= RW_PRINT expr TK_COMMA conv_type",
- /*  22 */ "conv_type ::= RW_BIN",
- /*  23 */ "conv_type ::= RW_DEC",
- /*  24 */ "conv_type ::= RW_HEX",
- /*  25 */ "expr ::= expr OP_ADD term",
- /*  26 */ "expr ::= expr OP_SUB term",
- /*  27 */ "expr ::= term",
- /*  28 */ "term ::= term OP_MUL factor",
- /*  29 */ "term ::= term OP_DIV factor",
- /*  30 */ "term ::= factor",
- /*  31 */ "factor ::= TK_NUMBER",
- /*  32 */ "factor ::= TK_VAR",
- /*  33 */ "factor ::= TK_LEFT_PAR expr TK_RIGHT_PAR",
+ /*   5 */ "opt_eols ::= eols",
+ /*   6 */ "opt_eols ::=",
+ /*   7 */ "stmt ::= assign_stmt",
+ /*   8 */ "stmt ::= print_stmt",
+ /*   9 */ "stmt ::= if_stmt",
+ /*  10 */ "stmt ::= while_stmt",
+ /*  11 */ "while_stmt ::= RW_WHILE TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt",
+ /*  12 */ "if_stmt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else",
+ /*  13 */ "optional_else ::= RW_ELSE eols block_stmt",
+ /*  14 */ "optional_else ::=",
+ /*  15 */ "block_stmt ::= TK_LEFT_CB opt_eols stmts opt_eols TK_RIGHT_CB",
+ /*  16 */ "block_stmt ::= stmt",
+ /*  17 */ "conditional_expr ::= expr relational_ops expr",
+ /*  18 */ "relational_ops ::= OP_GT",
+ /*  19 */ "relational_ops ::= OP_LT",
+ /*  20 */ "relational_ops ::= OP_GT_EQUAL",
+ /*  21 */ "relational_ops ::= OP_LT_EQUAL",
+ /*  22 */ "relational_ops ::= OP_NOT_EQUAL",
+ /*  23 */ "relational_ops ::= OP_EQUAL",
+ /*  24 */ "assign_stmt ::= TK_VAR OP_ASSIGN expr",
+ /*  25 */ "print_stmt ::= RW_PRINT expr TK_COMMA conv_type",
+ /*  26 */ "conv_type ::= RW_BIN",
+ /*  27 */ "conv_type ::= RW_DEC",
+ /*  28 */ "conv_type ::= RW_HEX",
+ /*  29 */ "expr ::= expr OP_ADD term",
+ /*  30 */ "expr ::= expr OP_SUB term",
+ /*  31 */ "expr ::= term",
+ /*  32 */ "term ::= term OP_MUL factor",
+ /*  33 */ "term ::= term OP_DIV factor",
+ /*  34 */ "term ::= factor",
+ /*  35 */ "factor ::= TK_NUMBER",
+ /*  36 */ "factor ::= TK_VAR",
+ /*  37 */ "factor ::= TK_LEFT_PAR expr TK_RIGHT_PAR",
 };
 #endif /* NDEBUG */
 
@@ -721,40 +735,44 @@ static const struct {
   YYCODETYPE lhs;         /* Symbol on the left-hand side of the rule */
   unsigned char nrhs;     /* Number of right-hand side symbols in the rule */
 } yyRuleInfo[] = {
-  { 40, 1 },
-  { 28, 3 },
-  { 28, 1 },
-  { 41, 2 },
-  { 41, 1 },
-  { 27, 1 },
-  { 27, 1 },
-  { 27, 1 },
-  { 30, 7 },
-  { 31, 3 },
-  { 31, 0 },
+  { 42, 2 },
   { 29, 3 },
   { 29, 1 },
-  { 35, 3 },
-  { 36, 1 },
-  { 36, 1 },
-  { 36, 1 },
-  { 36, 1 },
-  { 36, 1 },
-  { 36, 1 },
+  { 44, 2 },
+  { 44, 1 },
+  { 43, 1 },
+  { 43, 0 },
+  { 28, 1 },
+  { 28, 1 },
+  { 28, 1 },
+  { 28, 1 },
+  { 32, 6 },
+  { 31, 7 },
   { 33, 3 },
-  { 32, 4 },
-  { 39, 1 },
-  { 39, 1 },
-  { 39, 1 },
-  { 34, 3 },
-  { 34, 3 },
-  { 34, 1 },
+  { 33, 0 },
+  { 30, 5 },
+  { 30, 1 },
   { 37, 3 },
-  { 37, 3 },
-  { 37, 1 },
   { 38, 1 },
   { 38, 1 },
-  { 38, 3 },
+  { 38, 1 },
+  { 38, 1 },
+  { 38, 1 },
+  { 38, 1 },
+  { 35, 3 },
+  { 34, 4 },
+  { 41, 1 },
+  { 41, 1 },
+  { 41, 1 },
+  { 36, 3 },
+  { 36, 3 },
+  { 36, 1 },
+  { 39, 3 },
+  { 39, 3 },
+  { 39, 1 },
+  { 40, 1 },
+  { 40, 1 },
+  { 40, 3 },
 };
 
 static void yy_accept(yyParser*);  /* Forward Declaration */
@@ -818,165 +836,173 @@ static void yy_reduce(
   */
 /********** Begin reduce actions **********************************************/
         YYMINORTYPE yylhsminor;
-      case 0: /* input ::= stmts */
-#line 28 "expr.y"
-{ yymsp[0].minor.yy80->exec(); }
-#line 825 "expr_parser.cpp"
+      case 0: /* input ::= opt_eols stmts */
+#line 30 "expr.y"
+{ yymsp[0].minor.yy26->exec(); }
+#line 843 "expr_parser.cpp"
         break;
       case 1: /* stmts ::= stmts eols stmt */
-#line 30 "expr.y"
-{ yylhsminor.yy80 = yymsp[-2].minor.yy80; ((BlockStatement*)yylhsminor.yy80)->addStatement(yymsp[0].minor.yy80); }
-#line 830 "expr_parser.cpp"
-  yymsp[-2].minor.yy80 = yylhsminor.yy80;
+#line 32 "expr.y"
+{ yylhsminor.yy26 = yymsp[-2].minor.yy26; ((BlockStatement*)yylhsminor.yy26)->addStatement(yymsp[0].minor.yy26); }
+#line 848 "expr_parser.cpp"
+  yymsp[-2].minor.yy26 = yylhsminor.yy26;
         break;
       case 2: /* stmts ::= stmt */
-#line 31 "expr.y"
-{ yylhsminor.yy80 = new BlockStatement; ((BlockStatement*)yylhsminor.yy80)->addStatement(yymsp[0].minor.yy80); }
-#line 836 "expr_parser.cpp"
-  yymsp[0].minor.yy80 = yylhsminor.yy80;
+#line 33 "expr.y"
+{ yylhsminor.yy26 = new BlockStatement; ((BlockStatement*)yylhsminor.yy26)->addStatement(yymsp[0].minor.yy26); }
+#line 854 "expr_parser.cpp"
+  yymsp[0].minor.yy26 = yylhsminor.yy26;
         break;
-      case 5: /* stmt ::= assign_stmt */
-      case 6: /* stmt ::= print_stmt */ yytestcase(yyruleno==6);
-      case 7: /* stmt ::= if_stmnt */ yytestcase(yyruleno==7);
-      case 12: /* block_stmt ::= stmt */ yytestcase(yyruleno==12);
-#line 36 "expr.y"
-{ yylhsminor.yy80 = yymsp[0].minor.yy80; }
-#line 845 "expr_parser.cpp"
-  yymsp[0].minor.yy80 = yylhsminor.yy80;
+      case 7: /* stmt ::= assign_stmt */
+      case 8: /* stmt ::= print_stmt */ yytestcase(yyruleno==8);
+      case 9: /* stmt ::= if_stmt */ yytestcase(yyruleno==9);
+      case 10: /* stmt ::= while_stmt */ yytestcase(yyruleno==10);
+      case 16: /* block_stmt ::= stmt */ yytestcase(yyruleno==16);
+#line 41 "expr.y"
+{ yylhsminor.yy26 = yymsp[0].minor.yy26; }
+#line 864 "expr_parser.cpp"
+  yymsp[0].minor.yy26 = yylhsminor.yy26;
         break;
-      case 8: /* if_stmnt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else */
-#line 40 "expr.y"
-{ yymsp[-6].minor.yy80 = new IfStatement(yymsp[-4].minor.yy74,yymsp[-1].minor.yy80,yymsp[0].minor.yy80); }
-#line 851 "expr_parser.cpp"
+      case 11: /* while_stmt ::= RW_WHILE TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt */
+#line 46 "expr.y"
+{ yymsp[-5].minor.yy26 = new WhileStatement(yymsp[-3].minor.yy2, yymsp[0].minor.yy26); }
+#line 870 "expr_parser.cpp"
         break;
-      case 9: /* optional_else ::= RW_ELSE eols block_stmt */
-#line 42 "expr.y"
-{ yymsp[-2].minor.yy80 = yymsp[0].minor.yy80; }
-#line 856 "expr_parser.cpp"
-        break;
-      case 10: /* optional_else ::= */
-#line 43 "expr.y"
-{ yymsp[1].minor.yy80 = NULL; }
-#line 861 "expr_parser.cpp"
-        break;
-      case 11: /* block_stmt ::= TK_LEFT_CB stmts TK_RIGHT_CB */
-#line 45 "expr.y"
-{ yymsp[-2].minor.yy80 = yymsp[-1].minor.yy80; }
-#line 866 "expr_parser.cpp"
-        break;
-      case 13: /* conditional_expr ::= expr relational_ops expr */
+      case 12: /* if_stmt ::= RW_IF TK_LEFT_PAR conditional_expr TK_RIGHT_PAR TK_EOL block_stmt optional_else */
 #line 48 "expr.y"
-{ yylhsminor.yy74 = yymsp[-1].minor.yy74; ((BinaryExpr*)yylhsminor.yy74)->expr1 = yymsp[-2].minor.yy74; ((BinaryExpr*)yylhsminor.yy74)->expr2 = yymsp[0].minor.yy74; }
-#line 871 "expr_parser.cpp"
-  yymsp[-2].minor.yy74 = yylhsminor.yy74;
+{ yymsp[-6].minor.yy26 = new IfStatement(yymsp[-4].minor.yy2,yymsp[-1].minor.yy26,yymsp[0].minor.yy26); }
+#line 875 "expr_parser.cpp"
         break;
-      case 14: /* relational_ops ::= OP_GT */
+      case 13: /* optional_else ::= RW_ELSE eols block_stmt */
 #line 50 "expr.y"
-{ yymsp[0].minor.yy74 = new GreaterThanExpr(); }
-#line 877 "expr_parser.cpp"
+{ yymsp[-2].minor.yy26 = yymsp[0].minor.yy26; }
+#line 880 "expr_parser.cpp"
         break;
-      case 15: /* relational_ops ::= OP_LT */
+      case 14: /* optional_else ::= */
 #line 51 "expr.y"
-{ yymsp[0].minor.yy74 = new LessThanExpr(); }
-#line 882 "expr_parser.cpp"
+{ yymsp[1].minor.yy26 = NULL; }
+#line 885 "expr_parser.cpp"
         break;
-      case 16: /* relational_ops ::= OP_GT_EQUAL */
-#line 52 "expr.y"
-{ yymsp[0].minor.yy74 = new GreaterThanEqualExpr(); }
-#line 887 "expr_parser.cpp"
-        break;
-      case 17: /* relational_ops ::= OP_LT_EQUAL */
+      case 15: /* block_stmt ::= TK_LEFT_CB opt_eols stmts opt_eols TK_RIGHT_CB */
 #line 53 "expr.y"
-{ yymsp[0].minor.yy74 = new LessThanEqualExpr(); }
-#line 892 "expr_parser.cpp"
+{ yymsp[-4].minor.yy26 = yymsp[-2].minor.yy26; }
+#line 890 "expr_parser.cpp"
         break;
-      case 18: /* relational_ops ::= OP_NOT_EQUAL */
-#line 54 "expr.y"
-{ yymsp[0].minor.yy74 = new NotEqualExpr(); }
-#line 897 "expr_parser.cpp"
+      case 17: /* conditional_expr ::= expr relational_ops expr */
+#line 56 "expr.y"
+{ yylhsminor.yy2 = yymsp[-1].minor.yy2; ((BinaryExpr*)yylhsminor.yy2)->expr1 = yymsp[-2].minor.yy2; ((BinaryExpr*)yylhsminor.yy2)->expr2 = yymsp[0].minor.yy2; }
+#line 895 "expr_parser.cpp"
+  yymsp[-2].minor.yy2 = yylhsminor.yy2;
         break;
-      case 19: /* relational_ops ::= OP_EQUAL */
-#line 55 "expr.y"
-{ yymsp[0].minor.yy74 = new EqualExpr(); }
-#line 902 "expr_parser.cpp"
+      case 18: /* relational_ops ::= OP_GT */
+#line 58 "expr.y"
+{ yymsp[0].minor.yy2 = new GreaterThanExpr(); }
+#line 901 "expr_parser.cpp"
         break;
-      case 20: /* assign_stmt ::= TK_VAR OP_ASSIGN expr */
-#line 57 "expr.y"
-{ yylhsminor.yy80 = new AssignStatement(yymsp[-2].minor.yy0->name, yymsp[0].minor.yy74); }
-#line 907 "expr_parser.cpp"
-  yymsp[-2].minor.yy80 = yylhsminor.yy80;
-        break;
-      case 21: /* print_stmt ::= RW_PRINT expr TK_COMMA conv_type */
+      case 19: /* relational_ops ::= OP_LT */
 #line 59 "expr.y"
-{yymsp[-3].minor.yy80 = new PrintStatement(yymsp[-2].minor.yy74, yymsp[0].minor.yy4); }
-#line 913 "expr_parser.cpp"
+{ yymsp[0].minor.yy2 = new LessThanExpr(); }
+#line 906 "expr_parser.cpp"
         break;
-      case 22: /* conv_type ::= RW_BIN */
+      case 20: /* relational_ops ::= OP_GT_EQUAL */
+#line 60 "expr.y"
+{ yymsp[0].minor.yy2 = new GreaterThanEqualExpr(); }
+#line 911 "expr_parser.cpp"
+        break;
+      case 21: /* relational_ops ::= OP_LT_EQUAL */
 #line 61 "expr.y"
-{ yymsp[0].minor.yy4 = BIN; }
-#line 918 "expr_parser.cpp"
+{ yymsp[0].minor.yy2 = new LessThanEqualExpr(); }
+#line 916 "expr_parser.cpp"
         break;
-      case 23: /* conv_type ::= RW_DEC */
+      case 22: /* relational_ops ::= OP_NOT_EQUAL */
 #line 62 "expr.y"
-{ yymsp[0].minor.yy4 = DEC; }
-#line 923 "expr_parser.cpp"
+{ yymsp[0].minor.yy2 = new NotEqualExpr(); }
+#line 921 "expr_parser.cpp"
         break;
-      case 24: /* conv_type ::= RW_HEX */
+      case 23: /* relational_ops ::= OP_EQUAL */
 #line 63 "expr.y"
-{ yymsp[0].minor.yy4 = HEX; }
-#line 928 "expr_parser.cpp"
+{ yymsp[0].minor.yy2 = new EqualExpr(); }
+#line 926 "expr_parser.cpp"
         break;
-      case 25: /* expr ::= expr OP_ADD term */
+      case 24: /* assign_stmt ::= TK_VAR OP_ASSIGN expr */
 #line 65 "expr.y"
-{ yylhsminor.yy74 = new AddExpr(yymsp[-2].minor.yy74, yymsp[0].minor.yy74); }
-#line 933 "expr_parser.cpp"
-  yymsp[-2].minor.yy74 = yylhsminor.yy74;
+{ yylhsminor.yy26 = new AssignStatement(yymsp[-2].minor.yy0->name, yymsp[0].minor.yy2); }
+#line 931 "expr_parser.cpp"
+  yymsp[-2].minor.yy26 = yylhsminor.yy26;
         break;
-      case 26: /* expr ::= expr OP_SUB term */
-#line 66 "expr.y"
-{ yylhsminor.yy74 = new SubExpr(yymsp[-2].minor.yy74, yymsp[0].minor.yy74); }
-#line 939 "expr_parser.cpp"
-  yymsp[-2].minor.yy74 = yylhsminor.yy74;
-        break;
-      case 27: /* expr ::= term */
-      case 30: /* term ::= factor */ yytestcase(yyruleno==30);
+      case 25: /* print_stmt ::= RW_PRINT expr TK_COMMA conv_type */
 #line 67 "expr.y"
-{ yylhsminor.yy74 = yymsp[0].minor.yy74; }
-#line 946 "expr_parser.cpp"
-  yymsp[0].minor.yy74 = yylhsminor.yy74;
+{yymsp[-3].minor.yy26 = new PrintStatement(yymsp[-2].minor.yy2, yymsp[0].minor.yy22); }
+#line 937 "expr_parser.cpp"
         break;
-      case 28: /* term ::= term OP_MUL factor */
+      case 26: /* conv_type ::= RW_BIN */
 #line 69 "expr.y"
-{ yylhsminor.yy74 = new MulExpr(yymsp[-2].minor.yy74, yymsp[0].minor.yy74); }
-#line 952 "expr_parser.cpp"
-  yymsp[-2].minor.yy74 = yylhsminor.yy74;
+{ yymsp[0].minor.yy22 = BIN; }
+#line 942 "expr_parser.cpp"
         break;
-      case 29: /* term ::= term OP_DIV factor */
+      case 27: /* conv_type ::= RW_DEC */
 #line 70 "expr.y"
-{ yylhsminor.yy74 = new DivExpr(yymsp[-2].minor.yy74, yymsp[0].minor.yy74); }
-#line 958 "expr_parser.cpp"
-  yymsp[-2].minor.yy74 = yylhsminor.yy74;
+{ yymsp[0].minor.yy22 = DEC; }
+#line 947 "expr_parser.cpp"
         break;
-      case 31: /* factor ::= TK_NUMBER */
+      case 28: /* conv_type ::= RW_HEX */
+#line 71 "expr.y"
+{ yymsp[0].minor.yy22 = HEX; }
+#line 952 "expr_parser.cpp"
+        break;
+      case 29: /* expr ::= expr OP_ADD term */
 #line 73 "expr.y"
-{ yylhsminor.yy74 = new NumberExpr(yymsp[0].minor.yy0->value); }
-#line 964 "expr_parser.cpp"
-  yymsp[0].minor.yy74 = yylhsminor.yy74;
+{ yylhsminor.yy2 = new AddExpr(yymsp[-2].minor.yy2, yymsp[0].minor.yy2); }
+#line 957 "expr_parser.cpp"
+  yymsp[-2].minor.yy2 = yylhsminor.yy2;
         break;
-      case 32: /* factor ::= TK_VAR */
+      case 30: /* expr ::= expr OP_SUB term */
 #line 74 "expr.y"
-{ yylhsminor.yy74 = new VarExpr(yymsp[0].minor.yy0->name); }
-#line 970 "expr_parser.cpp"
-  yymsp[0].minor.yy74 = yylhsminor.yy74;
+{ yylhsminor.yy2 = new SubExpr(yymsp[-2].minor.yy2, yymsp[0].minor.yy2); }
+#line 963 "expr_parser.cpp"
+  yymsp[-2].minor.yy2 = yylhsminor.yy2;
         break;
-      case 33: /* factor ::= TK_LEFT_PAR expr TK_RIGHT_PAR */
+      case 31: /* expr ::= term */
+      case 34: /* term ::= factor */ yytestcase(yyruleno==34);
 #line 75 "expr.y"
-{ yymsp[-2].minor.yy74 = yymsp[-1].minor.yy74; }
+{ yylhsminor.yy2 = yymsp[0].minor.yy2; }
+#line 970 "expr_parser.cpp"
+  yymsp[0].minor.yy2 = yylhsminor.yy2;
+        break;
+      case 32: /* term ::= term OP_MUL factor */
+#line 77 "expr.y"
+{ yylhsminor.yy2 = new MulExpr(yymsp[-2].minor.yy2, yymsp[0].minor.yy2); }
 #line 976 "expr_parser.cpp"
+  yymsp[-2].minor.yy2 = yylhsminor.yy2;
+        break;
+      case 33: /* term ::= term OP_DIV factor */
+#line 78 "expr.y"
+{ yylhsminor.yy2 = new DivExpr(yymsp[-2].minor.yy2, yymsp[0].minor.yy2); }
+#line 982 "expr_parser.cpp"
+  yymsp[-2].minor.yy2 = yylhsminor.yy2;
+        break;
+      case 35: /* factor ::= TK_NUMBER */
+#line 81 "expr.y"
+{ yylhsminor.yy2 = new NumberExpr(yymsp[0].minor.yy0->value); }
+#line 988 "expr_parser.cpp"
+  yymsp[0].minor.yy2 = yylhsminor.yy2;
+        break;
+      case 36: /* factor ::= TK_VAR */
+#line 82 "expr.y"
+{ yylhsminor.yy2 = new VarExpr(yymsp[0].minor.yy0->name); }
+#line 994 "expr_parser.cpp"
+  yymsp[0].minor.yy2 = yylhsminor.yy2;
+        break;
+      case 37: /* factor ::= TK_LEFT_PAR expr TK_RIGHT_PAR */
+#line 83 "expr.y"
+{ yymsp[-2].minor.yy2 = yymsp[-1].minor.yy2; }
+#line 1000 "expr_parser.cpp"
         break;
       default:
       /* (3) eols ::= eols TK_EOL */ yytestcase(yyruleno==3);
       /* (4) eols ::= TK_EOL */ yytestcase(yyruleno==4);
+      /* (5) opt_eols ::= eols */ yytestcase(yyruleno==5);
+      /* (6) opt_eols ::= */ yytestcase(yyruleno==6);
         break;
 /********** End reduce actions ************************************************/
   };
