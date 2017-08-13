@@ -26,3 +26,4 @@ clean:
 	rm -f $(TARGET)
 	rm -f *.o
 	rm -f tokens.h
+	rm -f expr.out
